@@ -18,51 +18,59 @@
         }
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 40px; /* Increased padding */
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             text-align: center;
-            width: 320px; 
-            border: 8px solid #f8bbd0;
+            width: 450px; /* Box is now significantly wider */
+            border: 10px solid #f8bbd0;
             z-index: 10;
         }
-        h1 { color: #333; font-size: 1.3rem; margin: 15px 0; line-height: 1.4; }
+        h1 { 
+            color: #333; 
+            font-size: 2.2rem; /* Much bigger text */
+            margin: 25px 0; 
+            line-height: 1.2;
+            font-weight: bold;
+        }
         
-        /* Container for two images side-by-side */
         .img-container {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             justify-content: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .img-container img { 
             width: 48%; 
-            height: 140px; 
+            height: 200px; /* Taller images */
             object-fit: cover; 
-            border-radius: 10px; 
+            border-radius: 15px; 
+            border: 3px solid #fce4ec;
         }
 
         .btn-group { 
             position: relative; 
             display: flex; 
             justify-content: center; 
-            gap: 20px; 
-            height: 50px; 
+            gap: 30px; 
+            height: 70px; 
+            margin-top: 20px;
         }
         button { 
-            padding: 10px 20px; 
-            font-size: 1rem; 
+            padding: 15px 35px; /* Larger buttons */
+            font-size: 1.4rem; /* Larger button text */
             border: none; 
-            border-radius: 8px; 
+            border-radius: 12px; 
             cursor: pointer; 
-            font-weight: bold;
+            font-weight: 900;
+            transition: transform 0.2s;
         }
-        #yesBtn { background-color: #ff80ab; color: white; }
+        #yesBtn { background-color: #ff4081; color: white; box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4); }
         #noBtn { 
             background-color: #eeeeee; 
             color: #757575; 
             position: absolute; 
-            left: 55%;
+            left: 60%;
         }
     </style>
 </head>
@@ -71,7 +79,7 @@
     <div class="card" id="mainCard">
         <div class="img-container">
             <img src="images.jpeg" alt="Suma 1">
-            <img src="second_image.jpeg" alt="Suma 2">
+            <img src="Second_image.jpeg" alt="Suma 2">
         </div>
         
         <h1>suma, will you be my valentine?</h1>
@@ -85,10 +93,12 @@
     <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            const maxX = window.innerWidth - noBtn.offsetWidth;
-            const maxY = window.innerHeight - noBtn.offsetHeight;
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+            // Logic to keep the button within the "Big" viewable area
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+            
             noBtn.style.position = 'fixed'; 
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
@@ -96,15 +106,15 @@
 
         function showSuccess() {
             confetti({
-                particleCount: 150,
-                spread: 70,
+                particleCount: 250, /* More confetti for the big version */
+                spread: 100,
                 origin: { y: 0.6 }
             });
 
             document.getElementById('mainCard').innerHTML = `
-                <h1 style="color: #ff4081; font-size: 2.2rem;">YAY! 🎉</h1>
-                <div style="font-size: 4rem; margin-top: 10px;">❤️</div>
-                <p style="color: #333;">I knew you'd say yes!</p>
+                <h1 style="color: #ff4081; font-size: 4rem;">YAY! 🎉</h1>
+                <div style="font-size: 6rem; margin: 20px 0;">❤️</div>
+                <h2 style="font-size: 1.8rem; color: #333;">I knew you'd say yes!</h2>
             `;
         }
     </script>
