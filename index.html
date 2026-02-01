@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Suma</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body { 
-            background-color: #fce4ec; /* Soft pink background */
+            background-color: #fce4ec; 
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             display: flex; 
             justify-content: center; 
@@ -17,32 +18,37 @@
         }
         .card {
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             text-align: center;
-            max-width: 350px;
-            width: 90%;
+            /* Box is now small and centered */
+            width: 320px; 
             border: 8px solid #f8bbd0;
             z-index: 10;
         }
-        h1 { color: #333; font-size: 1.6rem; margin-bottom: 20px; line-height: 1.4; }
-        .gif-container img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
+        h1 { color: #333; font-size: 1.4rem; margin-bottom: 20px; line-height: 1.4; }
+        .img-box img { 
+            width: 100%; 
+            max-height: 220px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin-bottom: 15px; 
+        }
         .btn-group { 
             position: relative; 
             display: flex; 
             justify-content: center; 
             gap: 20px; 
             height: 50px; 
-            margin-top: 20px; 
         }
         button { 
             padding: 12px 25px; 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             border: none; 
             border-radius: 8px; 
             cursor: pointer; 
-            transition: transform 0.1s ease;
+            font-weight: bold;
         }
         #yesBtn { background-color: #ff80ab; color: white; }
         #noBtn { 
@@ -56,10 +62,10 @@
 <body>
 
     <div class="card" id="mainCard">
-        <div class="gif-container">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXpxYnd4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4JmthPTMmcT04MA/3OH2OF5Zt36fU9t6/giphy.gif" alt="cute icon">
+        <div class="img-box">
+            <img src="first_image.jpg" alt="Suma">
         </div>
-        <h1>suma will you be my valentine?</h1>
+        <h1>suma, will you be my valentine?</h1>
         
         <div class="btn-group">
             <button id="yesBtn" onclick="showSuccess()">YES!</button>
@@ -70,26 +76,28 @@
     <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            
-            // Calculate random positions within the visible window
             const maxX = window.innerWidth - noBtn.offsetWidth;
             const maxY = window.innerHeight - noBtn.offsetHeight;
-            
             const randomX = Math.floor(Math.random() * maxX);
             const randomY = Math.floor(Math.random() * maxY);
-            
-            // Apply new position
             noBtn.style.position = 'fixed'; 
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
         }
 
         function showSuccess() {
-            // Replaces the card content with the success message
+            // Trigger Confetti
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Update the card content
             document.getElementById('mainCard').innerHTML = `
-                <h1 style="font-size: 2.5rem; color: #ff4081;">YAY! 🎉</h1>
-                <div class="gif-container">
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmtpZ3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4JmthPTMmcT04MA/UMon0FO7RnLiqz5zkG/giphy.gif" alt="Success Celebration">
+                <h1 style="color: #ff4081; font-size: 2rem;">YAY! 🎉</h1>
+                <div class="img-box">
+                    <img src="success_image.jpg" alt="Celebration">
                 </div>
             `;
         }
