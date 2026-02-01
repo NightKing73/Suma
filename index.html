@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Suma</title>
+    <style>
+        body { 
+            background-color: #fce4ec; /* Soft pink background */
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            border: 8px solid #f8bbd0;
+            z-index: 10;
+        }
+        h1 { color: #333; font-size: 1.6rem; margin-bottom: 20px; line-height: 1.4; }
+        .gif-container img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
+        .btn-group { 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            height: 50px; 
+            margin-top: 20px; 
+        }
+        button { 
+            padding: 12px 25px; 
+            font-size: 1.1rem; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: transform 0.1s ease;
+        }
+        #yesBtn { background-color: #ff80ab; color: white; }
+        #noBtn { 
+            background-color: #eeeeee; 
+            color: #757575; 
+            position: absolute; 
+            left: 55%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXpxYnd4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4JmthPTMmcT04MA/3OH2OF5Zt36fU9t6/giphy.gif" alt="cute icon">
+        </div>
+        <h1>suma will you be my valentine?</h1>
+        
+        <div class="btn-group">
+            <button id="yesBtn" onclick="showSuccess()">YES!</button>
+            <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            
+            // Calculate random positions within the visible window
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            // Apply new position
+            noBtn.style.position = 'fixed'; 
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function showSuccess() {
+            // Replaces the card content with the success message
+            document.getElementById('mainCard').innerHTML = `
+                <h1 style="font-size: 2.5rem; color: #ff4081;">YAY! 🎉</h1>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmtpZ3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4Z3B4JmthPTMmcT04MA/UMon0FO7RnLiqz5zkG/giphy.gif" alt="Success Celebration">
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
