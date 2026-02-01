@@ -18,17 +18,17 @@
         }
         .card {
             background: white;
-            padding: 40px; /* Increased padding */
+            padding: 40px; 
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             text-align: center;
-            width: 450px; /* Box is now significantly wider */
+            width: 450px; 
             border: 10px solid #f8bbd0;
             z-index: 10;
         }
         h1 { 
             color: #333; 
-            font-size: 2.2rem; /* Much bigger text */
+            font-size: 2.2rem; 
             margin: 25px 0; 
             line-height: 1.2;
             font-weight: bold;
@@ -42,7 +42,7 @@
         }
         .img-container img { 
             width: 48%; 
-            height: 200px; /* Taller images */
+            height: 220px; 
             object-fit: cover; 
             border-radius: 15px; 
             border: 3px solid #fce4ec;
@@ -52,25 +52,44 @@
             position: relative; 
             display: flex; 
             justify-content: center; 
-            gap: 30px; 
-            height: 70px; 
+            gap: 40px; 
+            height: 130px; 
             margin-top: 20px;
+            align-items: flex-end; 
         }
+        
+        .no-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hint-text {
+            font-size: 0.9rem;
+            color: #888;
+            font-style: italic;
+        }
+
         button { 
-            padding: 15px 35px; /* Larger buttons */
-            font-size: 1.4rem; /* Larger button text */
+            padding: 18px 40px; 
+            font-size: 1.6rem; 
             border: none; 
-            border-radius: 12px; 
+            border-radius: 15px; 
             cursor: pointer; 
             font-weight: 900;
-            transition: transform 0.2s;
+            min-width: 140px;
         }
-        #yesBtn { background-color: #ff4081; color: white; box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4); }
+        
+        #yesBtn { 
+            background-color: #ff4081; 
+            color: white; 
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4); 
+        }
+        
         #noBtn { 
-            background-color: #eeeeee; 
-            color: #757575; 
-            position: absolute; 
-            left: 60%;
+            background-color: #e0e0e0; 
+            color: #424242; 
         }
     </style>
 </head>
@@ -86,33 +105,42 @@
         
         <div class="btn-group">
             <button id="yesBtn" onclick="showSuccess()">YES!</button>
-            <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
+            
+            <div class="no-container" id="noWrapper">
+                <span class="hint-text" id="hintText">no, seems to be a bit shy</span>
+                <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
+            </div>
         </div>
     </div>
 
     <script>
         function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            // Logic to keep the button within the "Big" viewable area
-            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+            const noWrapper = document.getElementById('noWrapper');
+            const hint = document.getElementById('hintText');
             
-            noBtn.style.position = 'fixed'; 
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+            hint.style.visibility = 'hidden'; // Hide the hint after first touch
+            noWrapper.style.position = 'fixed'; 
+            
+            const maxX = window.innerWidth - noWrapper.offsetWidth - 30;
+            const maxY = window.innerHeight - noWrapper.offsetHeight - 30;
+            
+            const randomX = Math.max(15, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(15, Math.floor(Math.random() * maxY));
+            
+            noWrapper.style.left = randomX + 'px';
+            noWrapper.style.top = randomY + 'px';
         }
 
         function showSuccess() {
             confetti({
-                particleCount: 250, /* More confetti for the big version */
-                spread: 100,
+                particleCount: 350, 
+                spread: 130,
                 origin: { y: 0.6 }
             });
 
+            // Matching the "YAY! 🎉🎊" exactly from your reference photo
             document.getElementById('mainCard').innerHTML = `
-                <h1 style="color: #ff4081; font-size: 4rem;">YAY! 🎉</h1>
+                <h1 style="color: #ff4081; font-size: 4rem;">YAY! 🎉🎊</h1>
                 <div style="font-size: 6rem; margin: 20px 0;">❤️</div>
                 <h2 style="font-size: 1.8rem; color: #333;">I knew you'd say yes!</h2>
             `;
