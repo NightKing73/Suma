@@ -18,23 +18,30 @@
         }
         .card {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             text-align: center;
-            /* Box is now small and centered */
             width: 320px; 
             border: 8px solid #f8bbd0;
             z-index: 10;
         }
-        h1 { color: #333; font-size: 1.4rem; margin-bottom: 20px; line-height: 1.4; }
-        .img-box img { 
-            width: 100%; 
-            max-height: 220px; 
+        h1 { color: #333; font-size: 1.3rem; margin: 15px 0; line-height: 1.4; }
+        
+        /* Container for two images side-by-side */
+        .img-container {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .img-container img { 
+            width: 48%; 
+            height: 140px; 
             object-fit: cover; 
             border-radius: 10px; 
-            margin-bottom: 15px; 
         }
+
         .btn-group { 
             position: relative; 
             display: flex; 
@@ -43,7 +50,7 @@
             height: 50px; 
         }
         button { 
-            padding: 12px 25px; 
+            padding: 10px 20px; 
             font-size: 1rem; 
             border: none; 
             border-radius: 8px; 
@@ -62,9 +69,11 @@
 <body>
 
     <div class="card" id="mainCard">
-        <div class="img-box">
-            <img src="first_image.jpg" alt="Suma">
+        <div class="img-container">
+            <img src="images.jpeg" alt="Suma 1">
+            <img src="second_image.jpeg" alt="Suma 2">
         </div>
+        
         <h1>suma, will you be my valentine?</h1>
         
         <div class="btn-group">
@@ -86,19 +95,16 @@
         }
 
         function showSuccess() {
-            // Trigger Confetti
             confetti({
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 }
             });
 
-            // Update the card content
             document.getElementById('mainCard').innerHTML = `
-                <h1 style="color: #ff4081; font-size: 2rem;">YAY! 🎉</h1>
-                <div class="img-box">
-                    <img src="success_image.jpg" alt="Celebration">
-                </div>
+                <h1 style="color: #ff4081; font-size: 2.2rem;">YAY! 🎉</h1>
+                <div style="font-size: 4rem; margin-top: 10px;">❤️</div>
+                <p style="color: #333;">I knew you'd say yes!</p>
             `;
         }
     </script>
